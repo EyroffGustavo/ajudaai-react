@@ -1,0 +1,153 @@
+@font-face {
+  font-family: "Hanuman";
+  src: url("../../assets/fonts/Hanuman-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../../assets/fonts/static/Inter-Regular.ttf");
+}
+
+@font-face {
+  font-family: "KaiseiDecol";
+  src: url("../../assets/fonts/KaiseiDecol-Medium.ttf");
+}
+
+@font-face {
+  font-family: "FugazOne";
+  src: url("../../assets/fonts/FugazOne-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Jomhuria";
+  src: url("../../assets/fonts/Jomhuria-Regular.ttf");
+}
+
+.container-home {
+  background-color: #fff !important;
+
+  & #lettering1 {
+    font-family: "KaiseiDecol", serif;
+    color: #2f2e41;
+  }
+
+  & #lettering2 {
+    font-family: "KaiseiDecol", serif;
+    color: #2f2e41;
+  }
+
+  & #lettering3 {
+    font-family: "FugazOne", sans-serif;
+    background: linear-gradient(90deg, #63afdf 21.45%, #729555 79.14%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  & #lettering4 {
+    font-family: "KaiseiDecol", serif;
+    color: #2f2e41;
+  }
+
+  & #about-us {
+    background-image: url("../../assets/images/wavybackground.png");
+    background-size: cover;
+  }
+
+  @media (max-width: 1120px) {
+    & #about-us {
+      background-image: url("../../assets/images/wavybackgroundmobile.png");
+    }
+  }
+
+  @media (min-width: 1571px) and (max-width: 1710px) {
+    & #banner-lettering {
+      line-height: 3.5rem;
+    }
+
+    & #lettering1 {
+      font-size: 50px;
+    }
+
+    & #lettering2 {
+      font-size: 26px;
+    }
+
+    & #lettering3 {
+      font-size: 90px;
+    }
+
+    & #lettering4 {
+      font-size: 80px;
+    }
+
+    & #banner-image {
+      width: 600px;
+      height: 300px;
+    }
+  }
+
+  @media (min-width: 1390px) and (max-width: 1570px) {
+    & #banner-lettering {
+      line-height: 2.5rem;
+    }
+
+    & #lettering1 {
+      font-size: 40px;
+    }
+
+    & #lettering2 {
+      font-size: 25px;
+    }
+
+    & #lettering3 {
+      font-size: 63px;
+    }
+
+    & #lettering4 {
+      font-size: 65px;
+    }
+
+    & #banner-image {
+      width: 600px;
+      height: 300px;
+    }
+  }
+
+  @media (min-width: 1121px) and (max-width: 1389px) {
+    & #banner-lettering {
+      line-height: 2.5rem;
+    }
+
+    & #lettering1 {
+      font-size: 32px;
+    }
+
+    & #lettering2 {
+      font-size: 19px;
+    }
+
+    & #lettering3 {
+      font-size: 52px;
+    }
+
+    & #lettering4 {
+      font-size: 51px;
+    }
+
+    & #banner-image {
+      width: 400px !important;
+      height: 300px !important;
+    }
+
+    & .icon-mobile {
+      width: 50px;
+      height: 50px;
+      padding-bottom: 5px;
+    }
+  }
+}
+
+* {
+  scroll-behavior: smooth;
+}
