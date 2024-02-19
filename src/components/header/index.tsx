@@ -17,7 +17,6 @@ export default function Header() {
               </h1>
             </div>
           </Link>
-
           <nav className="flex items-center justify-between">
             <div className="container mx-auto mt-2">
               <div className="flex header-menu-items space-x-6 hidden lg:flex">
@@ -78,7 +77,7 @@ export default function Header() {
                 </div>
               </div>
               <div className="flex header-menu-login space-x-2 hidden lg:flex">
-                <Link to="Sou.html" id="sign-up">
+                <Link to="/registerngo" id="sign-up">
                   Criar Conta
                 </Link>
                 <Link to="/login" className="login">

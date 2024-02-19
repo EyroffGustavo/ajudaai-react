@@ -1,166 +1,166 @@
-export default function RegisterNgo() {
-  document.addEventListener("DOMContentLoaded", () => {
-    $.ajax({
-      type: "GET",
-      url: "https://localhost:7070/State",
-      success: loadStates,
-      contentType: "application/json",
-      dataType: "json",
-    });
+import React from 'react';
+import ReactDOM from 'react-dom';
+import $ from 'jquery';
+import "./index.scss";
 
-    $.ajax({
-      type: "GET",
-      url: "https://localhost:7070/Causes",
-      success: loadCauses,
-      contentType: "application/json",
-      dataType: "json",
-    });
+
+export default function RegisterNgoPage() {
+  
+    $(() => {
+      $("#btn-sign-up").click(() => {
+          let tagCause = document.getElementById("ngo-causes") as HTMLSelectElement;
+          let idCause = tagCause.options[tagCause.selectedIndex].value;
+  
+          let tagState = document.getElementById("ngo-state") as HTMLSelectElement;
+          let idState = tagState.options[tagState.selectedIndex].value;
+  
+          let tagCity = document.getElementById("ngo-city") as HTMLSelectElement;
+          let idCity = tagCity.options[tagCity.selectedIndex].value;
+  
+          const values: {
+              ngoName: string,
+              description: string,
+              site: string,
+              headPerson: string,
+              telephone: string,
+              email: string,
+              password: string,
+              role: string,
+              causesId: string,
+              cityId: string,
+              cityStateId: string,
+          } = {
+            ngoName: $("#ngo-name").val() as string,
+            description: "",
+            site: $("#ngo-social").val() as string,
+            headPerson: $("#ngo-head-name").val() as string,
+            telephone: $("#ngo-phone").val() as string,
+            email: $("#ngo-email").val() as string,
+            password: $("#ngo-password").val() as string,
+            role: "admin",
+            causesId: idCause,
+            cityId: idCity,
+            cityStateId: idState,
+            
+          };
+  
+          console.log(values);
+  
+          if (!values.ngoName) {
+              alert("Favor informar o nome da ONG!");
+              $("#ngo-name").addClass("invalid");
+              return;
+          }
+          $("#ngo-name").removeClass("invalid");
+  
+          if (idState === "Estado") {
+              alert("Favor informar o estado!");
+              $("#ngo-state").addClass("invalid");
+              return;
+          }
+          $("#ngo-state").removeClass("invalid");
+  
+          if (idCity === "Cidade") {
+              alert("Favor informar a cidade!");
+              $("#ngo-city").addClass("invalid");
+              return;
+          }
+          $("#ngo-city").removeClass("invalid");
+  
+          if (!values.site) {
+              alert("Favor informar o site ou rede social!");
+              $("#ngo-social").addClass("invalid");
+              return;
+          }
+          $("#ngo-social").removeClass("invalid");
+  
+          if (!values.headPerson) {
+              alert("Favor informar o nome do responsável!");
+              $("#ngo-head-name").addClass("invalid");
+              return;
+          }
+          $("#ngo-head-name").removeClass("invalid");
+  
+          if (!values.telephone) {
+              alert("Favor informar o telefone!");
+              $("#ngo-phone").addClass("invalid");
+              return;
+          }
+          $("#ngo-phone").removeClass("invalid");
+  
+          if (values.causesId === "Causas") {
+              alert("Favor informar a área de atuação!");
+              $("#ngo-causes").addClass("invalid");
+              return;
+          }
+          $("#ngo-causes").removeClass("invalid");
+  
+          if (!values.email) {
+              alert("Favor informar o E-mail!");
+              $("#ngo-email").addClass("invalid");
+              return;
+          }
+          $("#ngo-email").removeClass("invalid");
+  
+          if (!values.password) {
+              alert("Favor informar a senha!");
+              $("#ngo-password").addClass("invalid");
+              return;
+          }
+          $("#ngo-password").removeClass("invalid");
+  
+          console.log(values);
+          sendDataBase(values);
+      });
   });
-
-  $(() => {
-    $("#btn-sign-up").click(() => {
-      var tag = document.getElementById("ngo-causes");
-      var idCause = tag.options[tag.selectedIndex].value;
-      tag = document.getElementById("ngo-state");
-      var idState = tag.options[tag.selectedIndex].value;
-      tag = document.getElementById("ngo-city");
-      var idCity = tag.options[tag.selectedIndex].value;
-      const values = {
-        ngoName: $("#ngo-name")[0].value,
-        description: "",
-        site: $("#ngo-social")[0].value,
-        headPerson: $("#ngo-head-name")[0].value,
-        telephone: $("#ngo-phone")[0].value,
-        email: $("#ngo-email")[0].value,
-        password: $("#ngo-password")[0].value,
-        role: "admin",
-        causesId: idCause,
-        cityId: idCity,
-        cityStateId: idState,
-      };
-      console.log(values);
-
-      if (!values.ngoName) {
-        alert("Favor informar o nome da ONG!");
-        $("#ngo-name").addClass("invalid");
-        return;
-      }
-      $("#ngo-name").removeClass("invalid");
-
-      if (idState === "Estado") {
-        // Ajuste aqui
-        alert("Favor informar o estado!");
-        $("#ngo-state").addClass("invalid");
-        return;
-      }
-      $("#ngo-state").removeClass("invalid");
-
-      if (idCity === "Cidade") {
-        // Ajuste aqui
-        alert("Favor informar a cidade!");
-        $("#ngo-city").addClass("invalid");
-        return;
-      }
-      $("#ngo-city").removeClass("invalid");
-      if (!values.site) {
-        alert("Favor informar o site ou rede social!");
-        $("#ngo-social").addClass("invalid");
-        return;
-      }
-      $("#ngo-social").removeClass("invalid");
-
-      if (!values.headPerson) {
-        alert("Favor informar o nome do responsável!");
-        $("#ngo-head-name").addClass("invalid");
-        return;
-      }
-      $("#ngo-head-name").removeClass("invalid");
-
-      if (!values.telephone) {
-        alert("Favor informar o telefone!");
-        $("#ngo-phone").addClass("invalid");
-        return;
-      }
-      $("#ngo-phone").removeClass("invalid");
-
-      if (values.causesId == "Causas") {
-        alert("Favor informar a área de atuação!");
-        $("#ngo-causes").addClass("invalid");
-        return;
-      }
-      $("#ngo-causes").removeClass("invalid");
-
-      if (!values.email) {
-        alert("Favor informar o E-mail!");
-        $("#ngo-email").addClass("invalid");
-        return;
-      }
-      $("#ngo-email").removeClass("invalid");
-
-      if (!values.password) {
-        alert("Favor informar a senha!");
-        $("#ngo-password").addClass("invalid");
-        return;
-      }
-      $("#ngo-password").removeClass("invalid");
-
-      console.log(values);
-      sendDataBase(values);
-    });
-  });
-
-  function loadStates(item: any) {
-    console.log(item);
-    item.forEach((linha: any) => {
-      const stateOption = `
-                <option value="${linha.id}">${linha.name}</option>
-            `;
-      $(`#ngo-state`).append($(stateOption));
-    });
+  
+  function loadStates(item: any[]) {
+      console.log(item);
+      item.forEach((linha: any) => {
+          const stateOption = `<option value="${linha.id}">${linha.name}</option>`;
+          $(`#ngo-state`).append($(stateOption));
+      });
   }
-
+  
   function sendDataBase(values: any) {
     $.ajax({
-      type: "POST",
-      url: "https://localhost:7070/ngo",
-      data: JSON.stringify(values),
-      contentType: "application/json",
-      dataType: "json",
-    });
+        type: "POST",
+        url: "https://localhost:7070/ngo",
+        data: JSON.stringify(values),
+        contentType: "application/json",
+        dataType: "json",
+      });
   }
-
+  
   function loadCity(event: Event) {
     event.preventDefault();
-    const id = (document.getElementById("ngo-state") as HTMLSelectElement)
-      .value;
-    $.ajax({
-      type: "GET",
-      url: `https://localhost:7070/City/${id}`,
-      success: loadCityHtml,
-      contentType: "application/json",
-      dataType: "json",
-    });
+    const stateElement = document.getElementById("ngo-state") as HTMLSelectElement | null;
+    const id = stateElement ? stateElement.value : "";
+      $.ajax({
+          type: "GET",
+          url: `https://localhost:7070/City/${id}`,
+          success: loadCityHtml,
+          contentType: "application/json",
+          dataType: "json",
+      });
   }
-
-  function loadCityHtml(item: any) {
-    const limpa = document.getElementById("ngo-city") as HTMLSelectElement;
-    limpa.innerText = "";
-    item.forEach((linha: any) => {
-      const cityOption = `
-                <option value="${linha.id}">${linha.name}</option>
-            `;
-      $(`#ngo-city`).append($(cityOption));
-    });
+  
+  function loadCityHtml(item: any[]) {
+      const limpa = document.getElementById("ngo-city") as HTMLSelectElement;
+      limpa.innerText = "";
+      item.forEach((linha: any) => {
+          const cityOption = `<option value="${linha.id}">${linha.name}</option>`;
+          $(`#ngo-city`).append($(cityOption));
+      });
   }
-
-  function loadCauses(item: any) {
-    item.forEach((linha: any) => {
-      const options = `
-            <option value="${linha.id}">${linha.name}</option>`;
-      $(`#ngo-causes`).append($(options));
-    });
+  
+  function loadCauses(item: any[]) {
+      item.forEach((linha: any) => {
+          const options = `<option value="${linha.id}">${linha.name}</option>`;
+          $(`#ngo-causes`).append($(options));
+      });
   }
-
+  
   return (
     <div className="w-full h-auto flex">
       <div className="box-form w-full h-auto lg:w-[680px] lg:h-[700px] mx-auto lg:rounded-xl lg:my-6">
@@ -182,8 +182,8 @@ export default function RegisterNgo() {
                   stroke-width="0.285"
                 />
                 <path
-                  d="M31.4002 31.4L46.6002 20.475L61.8002 31.4L46.6003 42.325L31.4002 31.4Z"
-                  fill="#D9D9D9"
+                d="M31.4002 31.4L46.6002 20.475L61.8002 31.4L46.6003 42.325L31.4002 31.4Z"
+                 fill="#D9D9D9"
                 />
                 <path
                   d="M1 31.4L16.2 20.475L31.4002 31.4L16.2002 42.325L1 31.4Z"
@@ -242,7 +242,7 @@ export default function RegisterNgo() {
                 id="ngo-state"
                 name="ngo-state"
                 className="pl-2 py-1"
-                onBlur="loadCity()"
+              
               >
                 <option disabled selected>
                   Estado
