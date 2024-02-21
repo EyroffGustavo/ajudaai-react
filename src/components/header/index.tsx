@@ -1,4 +1,4 @@
-import { ChevronDown } from "lucide-react";
+
 import "./index.scss";
 import { Logo } from "assets/shared";
 import { Link, Outlet } from "react-router-dom";
@@ -24,7 +24,7 @@ export default function Header() {
                 <div className="dropdown">
                   <Link to="" className="dropbtn flex">
                     Voluntariado
-                    <ChevronDown />
+
                   </Link>
                   <ul className="header-menu-dropdown-list">
                     <li>
@@ -43,7 +43,7 @@ export default function Header() {
             </div>
           </nav>
           <nav className="flex items-center justify-between">
-            <div className="container mx-auto mt-2 mr-5">
+            
               <div className="header-menu-mobile lg:hidden">
                 <Link to="" className="dropbtn-mobile">
                   <img
@@ -76,10 +76,15 @@ export default function Header() {
                   </ul>
                 </div>
               </div>
-              <div className="flex header-menu-login space-x-2 hidden lg:flex">
-                <Link to="/registerngo" id="sign-up">
-                  Criar Conta
-                </Link>
+            
+            <div className="flex header-menu-login space-x-2 hidden lg:flex">
+              <div className="criardown">
+
+                <button className="criarbtn" id="sign-up">Criar Conta</button>
+                <div className="criardown-content">
+                  <Link to="/loginCadastro" id="VoluntarioButton">Voluntario</Link>
+                  <Link to="/registerngo" id="OngButton" >ONG</Link>
+                </div>
                 <Link to="/login" className="login">
                   Entrar
                 </Link>
@@ -88,7 +93,7 @@ export default function Header() {
           </nav>
         </div>
       </header>
-      <Outlet/>
+      <Outlet />
     </div>
   );
 }
